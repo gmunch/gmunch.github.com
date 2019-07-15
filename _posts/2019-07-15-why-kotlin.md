@@ -92,8 +92,8 @@ date: 2019-07-15 21:05:00
 
   ```kotlin
   data class DataExample(
-    val name: String, 
-  var score: String?, 
+    val name: String,
+  var score: String?,
 	  var tags: Array<String>?
   )
 ```
