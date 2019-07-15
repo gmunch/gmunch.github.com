@@ -91,15 +91,17 @@ date: 2019-07-15 21:05:00
 - kotlin
 
   ```kotlin
-    data class DataExample(val name: String,
-                           var score: String?, var tags: Array<String>?)
-```
-	
+    data class DataExample(
+      val name: String,
+    var score: String?, 
+	    var tags: Array<String>?)
+  ```
+
   위에서 보았던 java 코드와 동일한 효과를 낸다. 
-정말 간결한지 않은가?
-  
+  정말 간결한지 않은가?
+
     data class 는 DTO, VO 등의 패턴을 쉽게 사용가능하도록 제공해주는 언어적 요소이다.
-  equals / hashCode, toString 등을 자동으로 생성해준다.
+    equals / hashCode, toString 등을 자동으로 생성해준다.
   
   > 잘가 lombok~
 
