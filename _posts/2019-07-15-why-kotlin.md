@@ -1,6 +1,6 @@
 ---
 
-layout: post
+layout: default
 title: 왜 코틀린인가?
 
 ---
