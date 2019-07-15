@@ -10,7 +10,7 @@ date: 2019-07-15 21:05:00
 
 먼저, 왜 코틀린을 왜 써야하는지 개인적인 생각을 적기 이전에 코틀린 공식 사이트에서 이야기 하는 코틀린을 왜 써야 하는가?에 대해서 알아보자. 
 
-![](/Users/kim.tj/gmunch.github.com/_posts/kotlinadvantage.png)
+![](kotlinadvantage.png)
 
 [kotlin 공식 사이트에서는](https://kotlinlang.org/) 간결함, 안정성, 그리고 JVM, Android 와 같은 기존의 존재하는 플랫폼 위에서 호환성을 이야기한다. 
 그럼 하나씩 짚어보자. 
