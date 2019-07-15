@@ -24,7 +24,7 @@ date: 2019-07-15 21:05:00
 
 - Pure java
 
-  ```java
+```java
   public class DataExample {
     private final String name;
     private int age;
@@ -70,31 +70,31 @@ date: 2019-07-15 21:05:00
     @Override public int hashCode() {
      //...
     }
-  ```
+```
 
   위와 같이 java 에서 data 를 표현하는 클래스는 보일러 플레이트 코드가 상당부분 존재한다. 
   필요한 부분이지만 귀찮은 건 사실이다. 이런 귀찮음을 느낀 훌륭한 개발자들이 좋은 도구를 개발했다. 
 
 - With [lombok](https://objectcomputing.com/resources/publications/sett/january-2010-reducing-boilerplate-code-with-project-lombok)
 
-  ```java
+```java
   @Data public class DataExample {
     private final String name;
     @Setter(AccessLevel.PACKAGE) private int age;
     private double score;
     private String[] tags;
-  ```
+```
 
   바로 lombok 이다. 위 코드는 pure java 코드와 동일하다. 
   이제 코틀린을 볼 차례이다. 
 
 - kotlin
 
-  ```kotlin
+```kotlin
   data class DataExample(
     val name: String, var score: String?, var tags: Array<String>?
 )
-	```
+```
   
 위에서 보았던 java 코드와 동일한 효과를 낸다. 
   정말 간결한지 않은가?
@@ -108,7 +108,7 @@ date: 2019-07-15 21:05:00
 
 - java
 
-- ```java
+```java
   public class Something {
       private Something() {}
   
@@ -120,15 +120,15 @@ date: 2019-07-15 21:05:00
           return LazyHolder.INSTANCE;
       }
   }
-  ```
+```
 
   Java 에서 Singleton Pattern 을 검색해보라. 얼마나 많은 지식과 많은 구현체를 볼 수 있는가? 
 
-  > [자바 싱글턴 패턴](https://www.journaldev.com/1377/java-singleton-design-pattern-best-practices-examples)
+    > [자바 싱글턴 패턴](https://www.journaldev.com/1377/java-singleton-design-pattern-best-practices-examples)
 
 - kotlin
 
-  ```kotlin
+```kotlin
   object DataProviderManager {
       fun registerDataProvider(provider: DataProvider) {
           // ...
@@ -137,7 +137,7 @@ date: 2019-07-15 21:05:00
       val allDataProviders: Collection<DataProvider>
           get() = // ...
   }
-  ```
+```
 
   object 키워드 하나면 끝이다. 
 
