@@ -73,20 +73,20 @@ date: 2019-07-15 21:05:00
   위와 같이 java 에서 data 를 표현하는 클래스는 보일러 플레이트 코드가 상당부분 존재한다. 
   필요한 부분이지만 귀찮은 건 사실이다. 이런 귀찮음을 느낀 훌륭한 개발자들이 좋은 도구를 개발했다. 
 
-  - With [lombok](https://objectcomputing.com/resources/publications/sett/january-2010-reducing-boilerplate-code-with-project-lombok)
+- With [lombok](https://objectcomputing.com/resources/publications/sett/january-2010-reducing-boilerplate-code-with-project-lombok)
 
-    ```java
-    @Data public class DataExample {
-      private final String name;
-      @Setter(AccessLevel.PACKAGE) private int age;
-      private double score;
-      private String[] tags;
-    ```
+  ```java
+  @Data public class DataExample {
+    private final String name;
+    @Setter(AccessLevel.PACKAGE) private int age;
+    private double score;
+    private String[] tags;
+  ```
 
-    바로 lombok 이다. 위 코드는 pure java 코드와 동일하다. 
-    이제 코틀린을 볼 차례이다. 
+  바로 lombok 이다. 위 코드는 pure java 코드와 동일하다. 
+  이제 코틀린을 볼 차례이다. 
 
-  - kotlin
+- kotlin
 
   - ```kotlin
     data class DataExample(val name: String, var score: String?, var tags: Array<String>?)
