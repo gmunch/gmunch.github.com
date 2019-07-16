@@ -193,7 +193,7 @@ if(obj is String) {
 
 새로운 언어의 성공여부는 해당 언어로 프로그램을 작성함에 있어 풍부한 라이브러리와 견고한 프레임워크가 아닐까 하는 생각이든다.
 
-### JVM 
+### JVM
 
 긴 세월동안 OOP 의 부흥과 같이 해온 JAVA 가 만들어 놓은 생태계는 가히 어마어마 하다고 말할 수 있다. 그런 JVM 과 호환은 kotlin 의 큰 장저이 아닐까 한다.
 
@@ -214,7 +214,7 @@ Kotlin compiler 는 kt 를 java byte 코드로 compile 하고 java 6+ 를 지원
 
 자바와 마찬가지로 kt 를 java byte 코드로 compile 하기 때문에 안드로이드에서도 사용할 수 있다.
 
-![java8 호환표]()
+![java8 호환표](https://raw.githubusercontent.com/gmunch/gmunch.github.com/master/assets/images/android_java8.png)
 
 > Android 에서는 minSdk 버전을 올리지 못하는 프로젝트에서는 kotlin 을 사용하여 Java 8 의 Stream 처리와 같은 연산을 쉽게 할 수 있다.  
 
