@@ -125,7 +125,7 @@ date: 2019-07-15 21:05:00
 
   Java 에서 Singleton Pattern 을 검색해보라. 얼마나 많은 지식과 많은 구현체를 볼 수 있는가?
 
-    > [자바 싱글턴 패턴](https://www.journaldev.com/1377/java-singleton-design-pattern-best-practices-examples)
+  > [자바 싱글턴 패턴](https://www.journaldev.com/1377/java-singleton-design-pattern-best-practices-examples)
 
 - kotlin
 
@@ -145,3 +145,77 @@ date: 2019-07-15 21:05:00
   간결해 보이는가? 위에서 말한 것 이외에도 람다의 간결한 표현, 늦은 초기화 등 충분히 간결한 문법이 많이 존재한다.
 
 ## 안전성(Safe)
+
+비교적 최근에 탄생한 언어 답게 안전성에 대한 철학이 좋다.
+Null safety, 스마트 캐스트, 불변 등 편리한 기능을 문법적으로 제공해준다.
+하나씩 살펴보자.
+
+### Null-safety
+```kt
+var output: String
+output = null   // Compilation error
+```
+
+```kt
+val name: String? = null    // Nullable type
+println(name.length())      // Compilation error
+```
+
+kotlin 은 compile 시점에 NPE 을 검증하고 방어한다.
+
+> Tony Hoare 는 Null 참조를 만든 것을 'billion-dollar mistake.' 라 부른다.[wikipedia](https://en.wikipedia.org/wiki/Tony_Hoare)
+
+### 스마트 캐스트(Smart cast)
+
+- java
+
+```java
+Object obj = "The quick brown fox jumped over a lazy dog";
+if(obj instanceof String) {
+    String str = (String) obj;
+    System.out.println("Found a String of length " + str.length());
+}
+```
+  위 코드는 자바에서 instanceof 연산자를 통해 obj 가 String 인지 구문을 체크하고 맞다면 형변환을 해서 obj 를 사용하는 코드다.
+  obj 가 String 의 객체인 것이 확인 되었는데 또 형변환을 해야 할까?
+  kotlin 코드를 살펴보자
+
+- kotlin
+```kotlin
+val obj: Any = "The quick brown fox jumped over a lazy dog"
+if(obj is String) {
+    println("Found a String of length ${obj.length}")
+}
+```
+  그렇다. 의미 없는 캐스팅은 필요 없다. 이제 왜 스마트 캐스트라 부르는지 감이 오는가?
+
+## 상호운용성(Interoperable)
+
+새로운 언어의 성공여부는 해당 언어로 프로그램을 작성함에 있어 풍부한 라이브러리와 견고한 프레임워크가 아닐까 하는 생각이든다.
+
+### JVM 
+
+긴 세월동안 OOP 의 부흥과 같이 해온 JAVA 가 만들어 놓은 생태계는 가히 어마어마 하다고 말할 수 있다. 그런 JVM 과 호환은 kotlin 의 큰 장저이 아닐까 한다.
+
+    .kt -> Kt compiler -> .class (Java byte)
+    -> JVM (with kt runtime library)
+
+Kotlin compiler 는 kt 를 java byte 코드로 compile 하고 java 6+ 를 지원한다.
+
+> Spring, Vert.x 등 공식적으로 kotlin 을 지원하는 프로젝트들이 늘어나고 있다.
+
+
+### Android
+
+안드로이드 역시 kotlin 을 공식언어로 지정한바 있다.
+
+    .kt -> Kt compiler -> .class -> .dex
+    -> dex23oat -> art (from android 5.0)
+
+자바와 마찬가지로 kt 를 java byte 코드로 compile 하기 때문에 안드로이드에서도 사용할 수 있다.
+
+![java8 호환표]()
+
+> Android 에서는 minSdk 버전을 올리지 못하는 프로젝트에서는 kotlin 을 사용하여 Java 8 의 Stream 처리와 같은 연산을 쉽게 할 수 있다.  
+
+### Other
