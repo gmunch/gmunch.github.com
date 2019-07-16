@@ -218,4 +218,14 @@ Kotlin compiler 는 kt 를 java byte 코드로 compile 하고 java 6+ 를 지원
 
 > Android 에서는 minSdk 버전을 올리지 못하는 프로젝트에서는 kotlin 을 사용하여 Java 8 의 Stream 처리와 같은 연산을 쉽게 할 수 있다.  
 
-### Other
+### Other(Browser / Native)
+
+아직 갈길이 멀었지만 ECMAScript 2015 를 목표로 Browser 플랫폼을 지원하려고 노력중이며, IOS, MacOS, Android, Linux, WebAssembly 와 같은 다양한 플랫폼을 지원하려 하고 있다.
+
+# 마무리
+
+자바를 완벽하게(kotlin 주장) 호환하면서 깔끔한 문법과 안전성 그리고 강력한 IDE(IntelliJ) 지원 등을 생각해보면 사용하지 않을 이유를 찾는게 더 어렵지 않을까?
+
+IntelliJ 에 있는 대부분의 기능은 Eclipse 에도 있는데 IntelliJ 를 써보면 Eclipse 로 돌아갈 순 없듯이, Kotlin 을 써보면 Java 로 돌아가기는 어려울 것이다.
+
+*일단 써보면 자바의 어두운 미래가 보일 것이다.*
