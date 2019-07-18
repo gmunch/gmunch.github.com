@@ -3,7 +3,11 @@
 layout: default
 title: 왜 코틀린인가?
 date: 2019-07-15 21:05:00
-
+lastmod : 2019-07-16 23:00:00
+sitemap :
+  changefreq : daily
+  priority : 1.0
+  
 ---
 
 # 왜 코틀린을 써야 하는가?
