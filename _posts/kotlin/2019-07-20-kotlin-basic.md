@@ -1,12 +1,16 @@
 ---
 
 layout: default
-title: 코틀린 살펴보
+title: 코틀린 살펴보기
 date: 2019-07-20 12:47:00
+lastmod : 2019-07-22 23:09:00
+sitemap :
+  changefreq : daily
+  priority : 1.0
 
 ---
 
-# 코틀린 기초 문법
+# 코틀린 기초 문법(\#1)
 
 [코틀린의 장점]({{site.baseurl}}{% post_url 2019-07-15-why-kotlin %})에서 코틀린을 왜 써야 하는지 살펴봤습니다.
 이제 코틀린의 문법을 볼 차례입니다.
@@ -120,10 +124,133 @@ fun <T> asList(vararg ts: T): List<T> {
 }
 ```
 
+파라미터는 가변인자를 가질 수 있는데 vararg 키워드를 사용합니다.
+가변 파라미터는 Array 로 표현 됩니다.
 
+> 하나의 파라미터만 vararg 를 선언할 수 있습니다. 가변인자가 자바와 다르게 순서에 상관 없이 위치할 수 있는데
+마지막에 위치해 있는게 아니라면 선언할때 named argument 형태로 호출 되어야 합니다.
+
+```kotlin
+val a = arrayOf(1, 2, 3)
+val list = asList(-1, 0, *a, 4)
+```
+
+위에서 처럼 넘겨주는 인자 중 배열이 존재하는 경우에는 spread 연산자(*) 를 사용하여야 합니다.
+
+#### Infix notation
+
+중위 표현식을 지원합니다. 중위 표현식을 사용하려는 함수의 조건은 아래와 같습니다.
+
+- 멤버 함수이거나 확장 함수여야 한다.
+- 단일 파라미터여야 한다.
+- 파라미터는 vararg 가 아니여야 하며, default value 가 없어야 한다.
+
+```kotlin
+infix fun Int.shl(x: Int): Int { ... }
+
+// calling the function using the infix notation
+1 shl 2
+
+// is the same as
+1.shl(2)
+```
+> 중위표현식은 산술 연산보다 우선순위가 낮습니다.
 
 ## 변수
 
-## 분기
+현대 언어에서는 Immutable 을 권장합니다. 그 이유는 멀티쓰레드로부터 안전하고,
+순수함수(Pure function) 와 함께 부수효과(Side-effect)를 줄이는데 큰 도움을 주기 때문입니다.
 
-## 반복
+### val ***(Immutable)***
+
+val 키워드로 선언된 변수는 단한번만 값을 할당할 수 있고,
+그 이후에는 읽기만 가능합니다.
+```kotlin
+val a: Int = 1 // 선언과 동시에 초기화
+val a = 1 // 타입 추론
+val b: Int
+b = 30 // 선언 후 대입 ( 한번만 가능 )
+```
+
+> 정수형 기본 타입은 Int, 소수형 기본 타입은 Double 입니다.
+
+### var ***(Mutable)***
+
+```kotlin
+var x = 5
+x += 1
+```
+
+재할당 가능한 변수는 var 키워드를 사용합니다.
+
+
+### Using nullable values and checking for null
+
+[billion-dollar mistake](https://en.wikipedia.org/wiki/Tony_Hoare) 10억달러의 실수를 경험하지 않게 하기위해서 명시적으로 nullable 을 표시해야 합니다.
+
+```kotlin
+fun parseInt(str: String): Int? {
+    // ...
+}
+```
+
+함수 리턴에 '?' 를 볼 수 있는데, 이것은 함수가 Null 을 반환 할 수 있다고 선언한 것입니다.
+
+따라서 사용하는 곳에서는 반드시 null 을 체크해야 compile error 피할 수 있습니다.
+
+```kotlin
+fun printProduct(arg1: String, arg2: String) {
+    val x = parseInt(arg1)
+    val y = parseInt(arg2)
+
+    // Using `x * y` yields error because they may hold nulls.
+    if (x != null && y != null) {
+        // x and y are automatically cast to non-nullable after null check
+        println(x * y)
+    }
+    else {
+        println("either '$arg1' or '$arg2' is not a number")
+    }    
+}
+```
+
+위에서 보시는 것처럼 x,y 는 null 이 가능하기 때문에 반드시 체크하셔야 합니다.
+
+#### Safe Calls
+
+앞서 살펴보았듯이, kotlin 에서 Nullable 은 명시적으로 선언되어야 하며 이것은 사용할때 반드시 체크되어야 합니다.
+따라서 NPE 는 아래 경우에만 발생합니다.
+
+- 명시적으로 throw NullPointerException() 을 한 경우
+- !! 연산자를 통해 null이 아님을 개발자가 보장한 경우
+- 생성자에서 this 참조를 어딘가에 전달하고 이것이 사용되어졌을 때
+- 슈퍼 클래스가 서브 클래스에서 초기화 되지 않은 상태를 사용하는 'open' 멤버를 호출하였을 때
+- 자바와 혼용했을 때 발생 가능한 문제
+
+```kotlin
+val b: String? = null
+println(b?.length)
+```
+
+위에서 처럼 '?.' 을 사용하여 if 문 대신 안전하게 호출 할 수 있습니다.
+
+```kotlin
+bob?.department?.head?.name
+```
+
+safety call 은 체이닝도 가능합니다.
+
+```kotlin
+val l: Int = if (b != null) b.length else -1
+```
+elvis 연산자를 사용하면 위와 같은 코드를 아래와 같이 간결하게 사용할 수 있습니다.
+
+```kotlin
+val l = b?.length ?: -1
+```
+
+# 마무리
+
+이번 블로그에서는 코틀린 프로그래밍에이써 제일 먼저 숙지해야 할 문법인 패키지의 생성 및 임포트 그리고 함수, 변수에 대해서 알아보았습니다.
+
+다음 블로그에서는 제어문에 대해서 살펴보도록 하겠습니다.
